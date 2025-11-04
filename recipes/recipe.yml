@@ -6,8 +6,8 @@ name: test-os
 description: Test - custom BlueBuild image
 
 # the base image to build on top of (FROM) and the version tag to use
-base-image: ghcr.io/ublue-os/bluefin:gts
-image-version: latest # latest is also supported if you want new updates ASAP
+base-image: ghcr.io/ublue-os/bluefin
+image-version: gts # latest is also supported if you want new updates ASAP
 
 # module configuration, executed in order
 # you can include multiple instances of the same module
