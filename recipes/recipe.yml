@@ -19,6 +19,10 @@ modules:
       - source: rpms/
         destination: /tmp/rpms/
 
+  - type: script
+    scripts:
+      - scripts/setup-luxtrust-automation.sh
+
   - type: rpm-ostree
     install:
       - /tmp/rpms/master-pdf-editor-4.3.89_qt5.x86_64.rpm

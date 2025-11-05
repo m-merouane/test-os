@@ -1,0 +1,15 @@
+[Unit]
+Description=Daily Luxtrust Version Check and Auto-Install
+After=multi-user.target
+
+[Timer]
+# Run daily at 10 AM
+OnCalendar=daily
+OnCalendar=*-*-* 10:00:00
+# Also run 5 minutes after boot (for initial installation)
+OnBootSec=5min
+# If system was off during scheduled time, run on next boot
+Persistent=true
+
+[Install]
+WantedBy=timers.target
