@@ -15,7 +15,7 @@ log() {
 mkdir -p /var/cache /var/log /var/lib
 
 # Get latest version from GitLab
-RESULT=$(/usr/local/bin/get-latest-luxtrust.sh 2>&1)
+RESULT=$(/usr/bin/get-latest-luxtrust.sh 2>&1)
 
 if [ $? -ne 0 ]; then
     log "ERROR: Failed to check for updates: $RESULT"
@@ -66,7 +66,7 @@ if [ "$INSTALLED" = "none" ]; then
         log "Download successful"
 
         # Install with auto-reboot mode
-        if /usr/local/bin/install-luxtrust.sh "$DOWNLOAD_PATH" true; then
+        if /usr/bin/install-luxtrust.sh "$DOWNLOAD_PATH" true; then
             log "Installation staged successfully - system will reboot"
             rm -f "$STATE_FILE"  # Reset failure counter
             rm -f "$DOWNLOAD_PATH"
@@ -103,7 +103,7 @@ if [ -f "$CACHE_FILE" ]; then
                 log "AUTO-UPDATE: Download successful"
 
                 # Install with auto-reboot mode
-                if /usr/local/bin/install-luxtrust.sh "$DOWNLOAD_PATH" true; then
+                if /usr/bin/install-luxtrust.sh "$DOWNLOAD_PATH" true; then
                     log "AUTO-UPDATE: Update staged successfully - system will reboot"
 
                     # Notify users about impending reboot
