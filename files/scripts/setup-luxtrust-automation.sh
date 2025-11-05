@@ -4,9 +4,9 @@ set -euo pipefail
 echo "Setting up Luxtrust automation..."
 
 # Make scripts executable
-chmod +x /usr/local/bin/get-latest-luxtrust.sh
-chmod +x /usr/local/bin/install-luxtrust.sh
-chmod +x /usr/local/bin/monitor-luxtrust-updates.sh
+chmod +x /usr/bin/get-latest-luxtrust.sh
+chmod +x /usr/bin/install-luxtrust.sh
+chmod +x /usr/bin/monitor-luxtrust-updates.sh
 
 # Create necessary directories
 mkdir -p /var/cache /var/log /var/lib

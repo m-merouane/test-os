@@ -25,7 +25,7 @@ check-luxtrust:
 
     echo ""
     echo "🌐 Latest available version:"
-    RESULT=$(/usr/local/bin/get-latest-luxtrust.sh 2>&1)
+    RESULT=$(/usr/bin/get-latest-luxtrust.sh 2>&1)
     if [ $? -eq 0 ]; then
         VERSION=$(echo "$RESULT" | cut -d'|' -f1)
         echo "  Version: $VERSION"
@@ -58,7 +58,7 @@ update-luxtrust:
 
     # Get latest version info
     echo "🔍 Checking for latest version..."
-    RESULT=$(/usr/local/bin/get-latest-luxtrust.sh)
+    RESULT=$(/usr/bin/get-latest-luxtrust.sh)
     VERSION=$(echo "$RESULT" | cut -d'|' -f1)
     FILENAME=$(echo "$RESULT" | cut -d'|' -f2)
 
@@ -96,7 +96,7 @@ update-luxtrust:
     echo ""
 
     # Run installation script
-    sudo /usr/local/bin/install-luxtrust.sh "$DOWNLOAD_PATH"
+    sudo /usr/bin/install-luxtrust.sh "$DOWNLOAD_PATH"
 
     # Cleanup
     rm -f "$DOWNLOAD_PATH"
@@ -133,4 +133,4 @@ install-luxtrust FILE_PATH="":
     fi
 
     echo ""
-    sudo /usr/local/bin/install-luxtrust.sh "$FILE_PATH"
+    sudo /usr/bin/install-luxtrust.sh "$FILE_PATH"
