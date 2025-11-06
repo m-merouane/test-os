@@ -13,6 +13,17 @@ chmod +x /usr/bin/enroll-freeipa.sh  # ← Add this
 # Create necessary directories
 mkdir -p /var/cache /var/log /var/lib
 
+# Ensure skel directory exists with proper permissions
+mkdir -p "/etc/skel/.config/Code Industry"
+chmod 755 "/etc/skel/.config/Code Industry"
+chmod 644 "/etc/skel/.config/Code Industry/Master PDF Editor.conf" 2>/dev/null || true
+
+# Create IPA client directories (for OSTree/immutable systems)
+mkdir -p /var/lib/ipa-client/sysrestore
+mkdir -p /var/lib/ipa
+mkdir -p /etc/ipa
+mkdir -p /var/log/ipa
+
 # Create initial log files
 touch /var/log/luxtrust-monitor.log
 touch /var/log/luxtrust-installations.log
