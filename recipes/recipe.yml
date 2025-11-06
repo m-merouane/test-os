@@ -21,13 +21,14 @@ modules:
 
   - type: script
     scripts:
-      - setup-luxtrust-automation.sh
+      - setup-automations.sh
 
   - type: rpm-ostree
     install:
       - /tmp/rpms/master-pdf-editor-4.3.89_qt5.x86_64.rpm
       - cups
       - system-config-printer
+      - freeipa-client
 
   - type: default-flatpaks
     configurations:
@@ -37,6 +38,7 @@ modules:
         install: # system flatpaks we want all users to have and not remove
           - com.google.Chrome
           - org.libreoffice.LibreOffice
+          - org.gnome.Connections
           - com.github.jeromerobert.pdfarranger
           - dev.zed.Zed
 

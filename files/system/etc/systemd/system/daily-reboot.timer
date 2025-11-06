@@ -1,0 +1,53 @@
+[Unit]
+Description=Reboot system daily at midnight
+
+[Timer]
+# Every day at midnight
+OnCalendar=*-*-* 00:00:00
+# Keep Persistent=true so it runs on boot if missed
+# But the script itself will be smart about when to actually reboot
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+
+
+## How This Works:
+
+### Scenario 1: PC Running at Midnight ✅
+
+#00:00 - Timer triggers
+#00:00 - Script checks: hour = 00 (nighttime)
+#00:00 - REBOOTS immediately
+
+
+### Scenario 2: PC Off at Midnight, Boots at 8 AM ✅
+
+#Friday 00:00 - Timer should have run (PC was off)
+#Monday 08:00 - PC boots
+#Monday 08:01 - Timer runs because Persistent=true
+#Monday 08:01 - Script checks: hour = 08 (daytime)
+#Monday 08:01 - Schedules reboot for midnight instead
+#Monday 08:01 - User can work normally
+#Tuesday 00:00 - PC reboots as scheduled
+
+
+### Scenario 3: PC Off Over Weekend, Boots Monday 8 AM ✅
+
+#Fri 00:00 - Missed
+#Sat 00:00 - Missed
+#Sun 00:00 - Missed
+#Mon 08:00 - PC boots
+#Mon 08:01 - Timer runs (one catch-up run)
+#Mon 08:01 - Script: hour = 08 (daytime)
+#Mon 08:01 - Schedules reboot for midnight
+#Mon 08:01 - User works normally
+#Tue 00:00 - Reboots
+
+
+### Scenario 4: User Working Late at 11:30 PM ✅
+
+#23:30 - User still logged in
+#00:00 - Timer triggers
+#00:00 - Script checks: hour = 00 (nighttime)
+#00:00 - REBOOTS (tough luck, save your work!)

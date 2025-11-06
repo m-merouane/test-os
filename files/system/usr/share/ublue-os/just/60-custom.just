@@ -134,3 +134,10 @@ install-luxtrust FILE_PATH="":
 
     echo ""
     sudo /usr/bin/install-luxtrust.sh "$FILE_PATH"
+
+# Enroll this machine to FreeIPA domain
+enroll-freeipa:
+    #!/usr/bin/bash
+    echo "Starting FreeIPA enrollment..."
+    echo ""
+    /usr/bin/enroll-freeipa.sh

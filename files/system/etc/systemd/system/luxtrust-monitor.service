@@ -1,10 +1,24 @@
 [Unit]
-Description=Luxtrust Middleware Version Monitor
-After=network-online.target
-Wants=network-online.target
+Description=Daily Luxtrust Version Check and Auto-Install
+After=multi-user.target
 
-[Service]
-Type=oneshot
-ExecStart=/usr/bin/monitor-luxtrust-updates.sh
-StandardOutput=journal
-StandardError=journal
+[Timer]
+# Run daily at 10 AM
+OnCalendar=*-*-* 10:00:00
+# Also run 5 minutes after boot (for initial installation)
+OnBootSec=5min
+# If system was off during scheduled time, run on next boot
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+
+
+### Why This is OK:
+
+#PC off at 10 AM, boots at 2 PM:
+#- 14:01 - Luxtrust check runs
+#- 14:02 - Finds update, downloads, installs
+#- 14:02 - Stages for next reboot
+#- 00:00 - Reboot happens, update applies
+✅ #Perfect! No issue with this running during work hours

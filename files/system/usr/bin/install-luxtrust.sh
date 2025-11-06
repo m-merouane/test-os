@@ -71,11 +71,19 @@ log ""
 LOG_FILE="/var/log/luxtrust-installations.log"
 echo "$(date '+%Y-%m-%d %H:%M:%S') - Installed version $VERSION (Gemalto: $GEMALTO_RPM, LuxTrust: $LUXTRUST_RPM)" | sudo tee -a "$LOG_FILE" > /dev/null
 
-if [ "$AUTO_MODE" = "true" ]; then
-    log "⚠️  System will reboot automatically in 60 seconds..."
-    log "   (Cancel with: sudo shutdown -c)"
-    sudo shutdown -r +1 "Luxtrust middleware installed, rebooting..."
-else
-    log "⚠️  REBOOT REQUIRED to activate Luxtrust Middleware"
-    log "   Run: systemctl reboot"
-fi
+# Simple message - daily reboot will handle it
+log "✓ Installation staged"
+log "ℹ️  Will be activated at midnight during daily reboot"
+
+# Notify users if anyone is logged in
+for user in $(who | awk '{print $1}' | sort -u); do
+    USER_DISPLAY=$(who | grep "^$user " | awk '{print $NF}' | tr -d '()' | head -1)
+    if [ -n "$USER_DISPLAY" ]; then
+        sudo -u "$user" DISPLAY="$USER_DISPLAY" DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$(id -u $user)/bus" \
+            notify-send \
+            "✓ Luxtrust Updated" \
+            "Version $VERSION installed. Will activate at midnight during daily reboot." \
+            --urgency=normal \
+            --icon=software-update-available 2>/dev/null
+    fi
+done
