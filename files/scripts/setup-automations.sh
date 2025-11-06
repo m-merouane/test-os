@@ -22,7 +22,6 @@ chmod 644 /var/log/luxtrust-*.log /var/log/daily-reboot.log
 # Enable timers
 systemctl enable luxtrust-monitor.timer
 systemctl enable daily-reboot.timer
-systemctl enable evening-reminder.timer
 
 echo "✓ Luxtrust automation configured"
 echo "✓ Smart daily reboot enabled"
