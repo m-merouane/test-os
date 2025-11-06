@@ -7,7 +7,6 @@ echo "Setting up Luxtrust automation and daily reboot..."
 chmod +x /usr/bin/get-latest-luxtrust.sh
 chmod +x /usr/bin/install-luxtrust.sh
 chmod +x /usr/bin/monitor-luxtrust-updates.sh
-chmod +x /usr/bin/evening-reminder.sh
 chmod +x /usr/bin/smart-reboot.sh
 chmod +x /usr/bin/enroll-freeipa.sh  # ← Add this
 
