@@ -1,0 +1,8 @@
+[ddc92a7a-c2d9-4f1f-8861-091c1a1e81ea]
+protocol=rdp
+host=37.187.137.84
+uri=rdp://37.187.137.84:3389
+certificate-verified=true
+scaling=true
+resize-supported=true
+scale-mode=resize-desktop
